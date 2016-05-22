@@ -1,161 +1,135 @@
-//Initialize global variables
-//Global variables for player position
-var counterX = 200;
-var counterY = 395;
-
-//Possible x and y pixel values
-var possibleY = [55, 140, 225, 310];
-var possibleX = [0, 100, 200, 300, 400];
-
-//Specifies lives left before game over
-var lives = 6;
-
-//Specifies inital score
-var score = 0;
-
-//reset function for when player dies or gets key
-function reset() {
-    counterX = 200;
-    counterY = 395;
-    lives = lives - 1;
-    var lifeSpanElement = document.getElementById("lives");
-    lifeSpanElement.innerHTML = lives;
-    if (lives === 0) {
-        document.write("<h1>Game Over</h1><h3>Refresh to play again</h3>");
-    }
+var Score = function  drawScore() {
+    ctx.font = "italic bold 16px Roboto";
+    ctx.fillStyle = "#0000";
+    ctx.fillText("score: "+ player.score, 1, 100);
 }
 
 // Enemies our player must avoid
-var Enemy = function() {
+var Enemy = function(y,speed) {
+
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    this.x = -100;
-    this.y = possibleY[Math.floor(Math.random() * possibleY.length)];
-};
+    this.x = 0;
+    this.y = y;
+    this.speed = Math.floor(Math.random() * 3 + 2);
+}
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-    this.x = this.x + (dt * 300 * Math.random());
-    //collision engine
-    if (this.x - counterX < 50 && this.x - counterX > 0 && this.y === counterY) {
-        reset()
-    };
-    //resets enemys at start after reaching end of board
-    if (this.x > 505) {
-        this.x = -100
-        this.y = possibleY[Math.floor(Math.random() * possibleY.length)];
-    }
+
+    this.x += this.speed;
+    if(this.x > 500) {
+        this.x = -100;
+ }
 }
 
+function checkCollisions() {
+    for (var i = 0; i < allEnemies.length; i++)
+
+        if (allEnemies[i].x < player.x + 0 &&
+            allEnemies[i].x + 30 > player.x
+            && allEnemies[i].y < player.y + 10
+            && allEnemies[i].y + player.y + 20)
+        {
+            player.reset();
+            player.score -= 100;
+    }
+}
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
-
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+}
 
 var Player = function() {
-    this.sprite = 'images/char-boy.png';
-    this.x = counterX;
-    this.y = counterY;
+
+    this.sprite = 'images/char-cat-girl.png';
+     this.x = 200;
+     this.y = 405;
+     this.width = 30;
+     // movement sensetivity
+     this.dx = 90;
+     this.dy = 95;
+     this.score = 0;
+
 };
-
-Player.prototype.update = function(dt) {
-    this.x = counterX;
-    this.y = counterY;
-
-    if (counterX === key.x && counterY === key.y) {
-        foundKey();
-    }
-}
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-Player.prototype.handleInput = function(key) {
-    switch (key) {
-        case 'up': 
-            //checks if player is off the map
-            if (counterY === 55) {
-                reset();
-            }
-            else {
-                counterY -= 85;
-            }
-            break;
-        case 'down':
-            if (counterY === 395) {
-                reset();
-            }
-            else {
-                counterY += 85;
-            }
-            break;
-        case 'left':
-            if (counterX === 0) {
-                reset();
-            }
-            else {
-                counterX -= 100;
-            }
-            break;
-        case 'right':
-            if (counterX === 400) {
-                reset();
-            }
-            else {
-                counterX += 100; 
-            }
-            
-            break;
+Player.prototype.update = function() {
+    // Sets player boundries and resets when finished!
+    if (this.x > 400) {
+        this.x = 400;
+    } else if (this.x < 0) {
+        this.x = 0;
+    } else if (this.y > 400) {
+        this.y = 400;
+    } else if (this.y < 0) {
+        this.y = 0
+        alert("Winner!")
+        player.score += 100;
+        this.reset();
     }
-}
-
-var Key = function() {
-    this.sprite = 'images/Key.png';
-    this.x = possibleX[Math.floor(Math.random() * possibleX.length)];
-    this.y = possibleY[Math.floor(Math.random() * possibleY.length)];
-    keyX = this.x;
-    keyY = this.y;
 };
 
-Key.prototype.render = function() {
+Player.prototype.reset = function() {
+    this.x = 200;
+    this.y = 400;
+}
+
+// Player movement keys
+Player.prototype.handleInput = function(keys) {
+    if ('up' === keys) {
+        this.y -= this.dy;
+    }
+    if ('down' === keys) {
+        this.y += this.dy;
+    }
+    if ('left' === keys) {
+        this.x -= this.dx;
+    }
+    if ('right' === keys) {
+        this.x += this.dx;
+    }
+};
+
+var Gem = function (x, y) {
+     this.sprite = 'images/gem-blue.png';
+     this.x =  [2, 275, 300];
+     this.y =  [200, 150, 80];
+
+ }
+
+Gem.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-function foundKey() {
-    counterX = 200;
-    counterY = 395;
-    score = score + 1;
-    key.x = possibleX[Math.floor(Math.random() * possibleX.length)];
-    key.y = possibleY[Math.floor(Math.random() * possibleY.length)];
-    var numKeys = document.getElementById("score");
-    numKeys.innerHTML = score;
-    if (score === 10) {
-        document.write("<h1>YOU WIN!</h1>");
-    }
+Gem.prototype.update = function () {
+ this.x = Math.floor(Math.random() + 15);
+ this.y = Math.floor(Math.random() + 13);
+
 }
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-var allEnemies = [new Enemy(), new Enemy(), new Enemy(), new Enemy(), new Enemy()];
+var enemy1 = new Enemy(50);
+var enemy2 = new Enemy(140);
+var enemy3 = new Enemy(220);
+
+var allEnemies = [enemy1, enemy2, enemy3];
+
 
 var player = new Player();
 
-var key = new Key();
+var gem = new Gem ();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
