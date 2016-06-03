@@ -1,7 +1,7 @@
 frontend-nanodegree-arcade-game
 ===============================
 
-You can view the project here: http://sweetcera.github.io/sc-frontend-nanodegree-arcade-game/
+You can view the project here: http://sweetcera.github.io/sc-frogger-udacity/
 
 Here are the rules:
 
