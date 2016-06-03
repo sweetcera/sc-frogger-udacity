@@ -2,73 +2,46 @@
 <html>
 <head>
     <title>Retro Frogger</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery-min.js"></script>
+
     <!-- Google Font -->
- 	<link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-
-    <script src="js/resources.js"></script>
-    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-    <!--<script src="bower_components/howler/howler.min.js"></script>-->
-    <!--<script src="js/sounds.js"></script>-->
-    <script src="js/app.js"></script>
-     <script type="text/javascript" src="js/engine.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
 </head>
+
 <body>
-    <!-- start header -->
-    <header>
-    	<img class="image-responsive" src="images/logo.png">
-    	<a class="js-toggle-music toggle-music on">Music On</a>
-    	<a class="js-toggle-music toggle-music off">Music Off</a>
-    </header>
-    <!-- end header -->
+    <!-- start wrapper -->
+    <div class="wrapper">
+    <!-- start menu -->
+    <div id="menu">
+      <!-- start main -->  
+      <div id="main">
+        <h1>Choose your player</h1>
+        <ul>
+          <li class="boy"><img src="images/char-boy.png"></li>
+          <li class ="cat"><img src="images/char-cat-girl.png"></li>
+          <li class ="pink"><img src="images/char-pink-girl.png"></li>
+          <li class ="horn"><img src="images/char-horn-girl.png"></li>
+          <li class ="princess"><img src="images/char-princess-girl.png"></li>
+        </ul>
+      </div>
+      <!-- end main -->
 
-    <!-- start footer -->
-    <footer>
-			<a id="howToOpen" class="how-to-link">How to play</a>
-    </footer>
-    <!-- end footer -->
+      <!-- start game over -->  
+      <div id="end">
+        <h1>Game Over!</h1>
+            <div id="restart"><a href="#" class="button play">New Game</a></div>
+            <div id="select"><a href="#" class="button select">Change Player</a></div>
+      </div>
+      <!-- end game over -->
 
-	<!-- Start Screen -->
-    <div id="startScreen" class="start-screen overlay">
-    	<div class="content">
-	    	<img class="image-responsive" src="images/logo.png">
-				<a id="playGame" class="button">Play Now!</a>
-			</div>
-			<div class="grass"></div>
     </div>
-    <!-- end -->
-
-    <!-- How To Play -->
-		<div id="howTo" class="how-to overlay hidden">
-			<div class="content">
-			<h2 class="heading">How to Play</h2>
-				<p>Press the up, down, left and right arrow keys on your keyboard to move the player. Do your best to get to the other side of the
-				road without being taken down by a bug!</p>
-				<p>You have 3 lives. Clearing a level is worth 600 points, and a gem of any color is worth 300.</p>
-				<p>Go get em!</p>
-				<a id="howToClose" class="button">Got it!</a>
-			</div>
-		</div>
-    <!-- end -->
-
-	<!-- Collision -->
-    <div id="collision" class="collision overlay hidden"></div>
-    <!-- end -->
-
-	<!-- Game Over -->
-    <div id="gameOver" class="game-over overlay hidden">
-    	<div class="content">
-				<h2 class="heading">Game Over</h2>
-				<div class="final-score">
-					Final Score: <span id="score"></span>
-				</div>
-				<a id="playAgain" class="button">Play Again</a>
-				<img class="responsive" src="images/char-boy-dead.png">
-			</div>
+    <!-- end menu -->
     </div>
-    <!-- end -->
-
+    <!-- end wrapper -->
+    <script src="js/resources.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/engine.js"></script>
 </body>
 </html>

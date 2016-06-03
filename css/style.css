@@ -1,194 +1,90 @@
 /* Google Font 
-font-family: 'Lato', sans-serif;
+font-family: 'Roboto Condensed', sans-serif;
 */
 
 
 body {
-  background: #202020;
-  text-align: center;
+    text-align: center;
 }
 
-canvas {
-	width: 90%;
-	height: 90%;
-	transition: all 1s linear;
+ul {
+	list-style-type: none;
+	padding: 0;
 }
 
-@media only screen and (min-width: 800px) {
-	canvas {
-		margin-top: 10px;
-		height: 707px;
-		width: 707px;
-	}
+*, *:before, *:after {
+  box-sizing: border-box;
 }
 
-a:hover {
-	cursor: pointer;	
+
+
+#menu.main {
+ 	background-color: #333;
 }
 
-.heading {
-	color: #ffffff;
-	font-family: 'Lato', sans-serif;
+.visible {
+	display: block;
 }
 
+
+/* Choose Menu Styles */
+
+#menu li{
+	display: inline-flex;
+	border: 4px solid #201af9;
+	background: #fff;
+}
+
+#menu li:hover{
+	border: 4px solid #1c19a4;
+}
+
+
+/* Main Area */
+
+#main, #end {
+	display: none;
+	height: 60%;
+	overflow: auto;
+	margin: auto;
+	position: absolute;
+	top: 0; 
+	left: 0; 
+	bottom: 0; 
+	right: 0;
+}
+
+#main h1 {
+	color: #000000;
+}
+
+.end {
+	display: none;
+}
+
+.main {
+	display: none;
+}
+
+
+/* End Game Buttons*/
 
 .button {
-	border-radius: 3px;
-	display: inline-block;
-	padding: 6px 40px;
-	margin: 65px;
-	background: #68d44f;
-	font-family: 'Lato', sans-serif;
+	display: block;
+	width: 30%;
+	margin: 0 auto;
+	height: 136%;
+	line-height: 440%;
+	background-color: #452b66;
+	border: 20px #ffffff solid;
+	border-radius: 5px;
 	color: #ffffff;
-	font-size: 29px;
-	letter-spacing: 1px;
-	text-shadow: 1px 1px 1px #328532;
+	font-weight: bold;
+	font-size: 24px;
+	font-family: 'Roboto Condensed', sans-serif;
+	text-decoration: none;
 }
 
 .button:hover {
-	opacity: 0.95;
-}
-
-/* Toggle Music */
-
-.toggle-music {
-	color: #ffffff;
-	position: absolute;
-	top: 10px;
-	right: -200px;
-	font-family: 'Lato', sans-serif;
-	font-size: 17px;
-}
-
-.toggle-music.off {
-	display: none;
-}
-
-
-.image-responsive {
-	display: block;
-	width: 100%;	
-}
-
-
-.overlay {
-	background: #202020;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 99999;	
-}
-
-.overlay > .content {
-	margin: auto;
-}
-
-.hidden {
-	display: none;
-}
-
-/* header styles */
-header {
-	position: absolute;
-	width: 300px;
-	top: 15px;
-	left: 0;
-	right: 0;
-	margin: auto;	
-}
-
-/* footer styles */
-footer {
-	padding: 0;
-	width: 100%;
-	margin: auto;
-	position: absolute;
-	text-align: center;
-	left: 0;
-	right: 0;
-	z-index: 99999;
-	top: 695px;
-}
-
-footer .how-to-link {
-	color: #ffffff;
-	font-family: 'Lato', sans-serif;	
-	font-size: 20px;
-	word-spacing: 5px;
-}
-
-/* Start Screen */
-.start-screen > .content {
-	max-width: 600px;	
-	padding: 15% 10%;
-}
-
-.start-screen .grass {
-	background: url(../images/grass-block.png);
-	height: 172px;
-	width: 100%;
-	background-repeat: repeat-x;
-	position: absolute;
-	bottom: 0;
-	left: 0;
-}
-
-
-
-.how-to > .content {
-	max-width: 600px;
-	padding: 5% 10%;
-}
-
-.how-to .heading {
-	font-size: 60px;
-}
-
-.how-to p {
-	color: #ffffff;
-	font-size: 20px;
-	letter-spacing: 1px;
-	font-family: 'Lato', sans-serif;
-}
-
-
-
-.collision {
-	background: #FF0000;
-	opacity: 0.2;
-}
-
-
-
-
-.game-over > .content {
-	max-width: 800px;
-	margin-bottom: 0;
-	padding: 12% 10%;
-}
-
-.game-over .heading {
-	font-size: 100px;
-	margin-bottom: 0;
-}
-
-.game-over .final-score {
-	color: #ffffff;
-	font-family: 'Lato', sans-serif;
-	font-size: 20px;
-}
-
-.game-over .final-score span {
-	margin-left: 5px;
-	font-size: 24px;
-}
-
-.game-over img {
-	position: absolute;
-	top: 140px;
-	right: 0;
-	left: 0;
-	margin: auto;	
+	background-color: #604265;
 }
