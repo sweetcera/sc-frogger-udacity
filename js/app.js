@@ -14,8 +14,8 @@ var player_move_x = 101;
 var player_move_y = 85;
 
 // Setting Y and X coordinates for our canvas grid.
-var co_y = [125,205,290,370];
-var co_x = [1, 101, 202, 303, 404, 505, 606, 707];
+var CONSTANT_VALUE_Y = [125,205,290,370];
+var CONSTANT_VALUE_X = [1, 101, 202, 303, 404, 505, 606, 707];
 
 // New Game Boolean
 var newGame = true;
@@ -79,23 +79,23 @@ function resetGame() {
     createEnemies(numOfEnemies);
     player.x = 0;
     player.y = 460;
-    gem.x = randomizer(co_x);
-    gem.y = randomizer(co_y);
+    gem.x = randomizer(CONSTANT_VALUE_X);
+    gem.y = randomizer(CONSTANT_VALUE_Y);
     playerIsAlive = true;
 }
 // Gems that our player will collect to win the game!
 var Gem = function() {
     this.sprite = 'images/Gem-Orange.png';
-    this.x = randomizer(co_x);
-    this.y = randomizer(co_y);
+    this.x = randomizer(CONSTANT_VALUE_X);
+    this.y = randomizer(CONSTANT_VALUE_Y);
 };
 
 Gem.prototype.update = function(dt) {
 
 };
 Gem.prototype.resetPosition = function() {
-    this.x = randomizer(co_x);
-    this.y = randomizer(co_y);
+    this.x = randomizer(CONSTANT_VALUE_X);
+    this.y = randomizer(CONSTANT_VALUE_Y);
 };
 Gem.prototype.hide = function() {
     this.x = -1000;
@@ -109,7 +109,7 @@ Gem.prototype.render = function() {
 var Enemy = function() {
     this.sprite = 'images/enemy-bug.png';
     this.x = -20; // enemies starts moving from the left side of the canvas.
-    this.y = randomizer(co_y);
+    this.y = randomizer(CONSTANT_VALUE_Y);
     this.speed = randomizer(enemySpeed);
 };
 
@@ -121,7 +121,7 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     if (this.x > 808) {
         this.x = -100;
-        this.y = randomizer(co_y);
+        this.y = randomizer(CONSTANT_VALUE_Y);
         this.speed = randomizer(enemySpeed);
     }
     this.x = this.x + this.speed * dt;
@@ -153,14 +153,14 @@ Player.prototype.killed = function(dt) {
     showMenu();
 };
 
-function StepIntoWater(self) {
+Player.prototype.stepIntoWater = function () {
     numOfGems = numOfGems - 1;
-    self.y = self.y - player_move_y + 10;
+    this.y = this.y - player_move_y + 10;
     if (numOfGems < 0) {
-        player.killed();
+        this.killed();
     }
     else {
-       self.y = 460;
+       this.y = 460;
     }
 }
 
@@ -173,7 +173,7 @@ Player.prototype.handleInput = function(key) {
             }
             else {
                //Player is Going to step into the water, which should send them into water and lose them one Gem
-               StepIntoWater(this);
+               this.stepIntoWater();
             }
             break;
         case "down":
